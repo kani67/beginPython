@@ -11,20 +11,23 @@ radius = 20
 
 red = (255,0,0)
 black = (0,0,0)
+white = (255,255,255)
 color = red
 thickness = 2
 
 
 screen = pygame.display.set_mode((width, height))
 
-x = 20
-y = 20
+x = width / 2
+y = height / 2
 
 
-speed = 0.005
+speed_x = 0.5
+speed_y = 1
 
-vector = [x, y]
 
+
+pygame.draw.circle(screen, white, (int(x),int(y)), radius)
 
 while True:
   
@@ -32,8 +35,13 @@ while True:
   screen.fill(black)
 
   pygame.draw.circle(screen, color, (int(x),int(y)), radius)
+  
 
+  print("x :" , x, "y :", y)
 
+  
+  
+  
   for event in pygame.event.get():
     if event.type == pygame.KEYDOWN: 
       if event.key == pygame.K_ESCAPE: 
@@ -42,25 +50,27 @@ while True:
         pygame.quit();sys.exit()
 
   
-  x += vector[0] * speed
-  y += vector[1] * speed
-   
-  if x > width: 
-    x = width
-
-  #if x < width:
-   # x += x  
+  x += speed_x
+  y += speed_y
   
-  if x < width:
-    x += 0
+  
+  #reversing velocity
+  # by taking speed * -1
 
-  if y > height:
-    y = height
+  if x < 0:
+    x = 20
+    speed_x *= -1
+ 
+  if x > width - radius:
+    x = width - radius
+    speed_x *= -1
 
-  #if y < height:
-   # y += y   
+  if y < 0:
+    y = 20
+    speed_y *= -1
 
-  if y < height:
-    y = 0  
+  if y > height - radius:
+    y = height - radius
+    speed_y *= -1    
 
   pygame.display.update() 
