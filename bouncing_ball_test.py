@@ -36,10 +36,6 @@ while True:
 
   pygame.draw.circle(screen, color, (int(x),int(y)), radius)
   
-
-  print("x :" , x, "y :", y)
-
-  
   
   
   for event in pygame.event.get():
